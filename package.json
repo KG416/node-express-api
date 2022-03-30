@@ -1,0 +1,19 @@
+{
+  "name": "node-express-rest-api",
+  "version": "1.0.0",
+  "description": "A CRUD rest api using node.js and express.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
