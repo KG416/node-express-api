@@ -1,0 +1,11 @@
+// Install VS Code extention "REST Client" to test endpoints in this file
+
+GET http://localhost:5000/products
+
+###
+
+GET http://localhost:5000/products/2
+
+###
+
+POST http://localhost:5000/products
