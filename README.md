@@ -1,6 +1,6 @@
 # Vanilla node REST API
 
-A CRUD rest api using no frameworks. Built with *node.js*, *nodemon* & *uuid*.
+A CRUD rest api built with *node.js* & *express*.
 
 ## Prerequisites
 
@@ -40,4 +40,6 @@ The code is organized using the MVC pattern (minus view, not needed for this pro
 
 ## Inspiration
 
-This project was created with inspiration from [Traversy Media](https://www.youtube.com/watch?v=_1xa8Bsho6A&ab_channel=TraversyMedia).
+[Web Dev Simplified](https://www.youtube.com/watch?v=fgTGADljAeg)
+
+[Net Ninja](https://www.youtube.com/watch?v=zb3Qk8SG5Ms&list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU)
