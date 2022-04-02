@@ -28,22 +28,19 @@ async function getProduct(req, res) {
 
 async function createProduct(req, res) {
     try {
-        const body = await getPostData(req)
-        const { name, description, price } = body
+        const reqBody = req.body
 
         const product = {
-            name,
-            description,
-            price
+            name: reqBody.name,
+            description: reqBody.description,
+            price: reqBody.price
         }
 
         const newProduct = await Product.create(product)
-
-        //res.send(newProduct)
-        res.send('NEW PRODUCT')
+        res.status(201).json(newProduct)
 
     } catch (err) {
-        console.log(err)
+        res.status(400).json({ message: err.message })
     }
 }
 
