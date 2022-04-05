@@ -16,3 +16,16 @@ Content-Type: application/json
     "description": "Test description",
     "price": 100
 }
+
+###
+
+PUT http://localhost:5000/products/6
+Content-Type: application/json
+
+{
+    "name": "New test name"
+}
+
+###
+
+DELETE http://localhost:5000/products/6

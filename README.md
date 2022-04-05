@@ -18,11 +18,7 @@ You need to have [NodeJS](https://nodejs.org/en/) installed.
 
 1. Install VS Code extention `REST Client`
 2. Make sure the node server is running (see installation above).
-3. In `test.rest`, click "Send request" on the corresponding request you want to send. This opens a new tab with the response.
-
-## Version control (git)
-
-Progress is chronologically divided into different branches. For example `1-project-setup` and `2-node-server`.
+3. In `test.rest`, click "Send request" on the corresponding request you want to send. This opens a new tab with the response. *Remember to enter a valid id when sending `PUT` and `DELETE` requests, check in `products.json` to find a valid id.*
 
 ## Tools
 
@@ -48,6 +44,7 @@ The code is organized using the MVC pattern (minus view, not needed for this pro
 - controllers
 - models
 - routes
+- utils
 
 ## Inspiration
 

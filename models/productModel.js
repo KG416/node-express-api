@@ -1,6 +1,8 @@
 let products = require('../data/products.json')
 const { v4: uuidv4 } = require('uuid')
-const { writeDataToFile } = require('../utils')
+const { writeDataToFile } = require('../utils/utils')
+
+const PRODUCTS_PATH = './data/products.json'
 
 function findAll() {
     try {
@@ -23,35 +25,38 @@ function create(product) {
     try {
         const newProduct = { id: uuidv4(), ...product }
         products.push(newProduct)
-        writeDataToFile('./data/products.json', products)
+        writeDataToFile(PRODUCTS_PATH, products)
         return product
     } catch (err) {
         console.log(err.message)
     }
 }
 
-/* 
+
 function update(id, product) {
-    return new Promise((resolve, reject) => {
+    try {
         const index = products.findIndex((p) => p.id === id)
         products[index] = { id, ...product }
-        writeDataToFile('./data/products.json', products)
-        resolve(products[index])
-    })
+        writeDataToFile(PRODUCTS_PATH, products)
+        return products[index]
+    } catch (err) {
+        console.log(err.message)
+    }
 }
 
 async function remove(id) {
-    return new Promise((resolve, reject) => {
+    try {
         products = products.filter(p => p.id !== id)
-        writeDataToFile('./data/products.json', products)
-        resolve()
-    })
-} */
+        writeDataToFile(PRODUCTS_PATH, products)
+    } catch (err) {
+        console.log(err.message)
+    }
+}
 
 module.exports = {
     findAll,
     findById,
     create,
-    /* update,
-     remove */
+    update,
+    remove
 } 

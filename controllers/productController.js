@@ -4,6 +4,10 @@ const PRODUCT_NOT_FOUND = { message: 'product not found' }
 async function getProducts(req, res) {
     try {
         const products = await Product.findAll()
+
+        if (!products) {
+            return res.status(500).json({ message: 'failed to get products' })
+        }
         res.json(products)
     } catch (err) {
         res.status(500).json({ message: err.message })
@@ -15,26 +19,29 @@ async function getProduct(req, res) {
         const product = await Product.findById(req.params.id)
 
         if (!product) {
-            return res.status(404).send(PRODUCT_NOT_FOUND)
+            return res.status(404).json(PRODUCT_NOT_FOUND)
         }
         res.json(product)
 
     } catch (err) {
-        res.send({ message: err.message })
+        res.json({ message: err.message })
     }
 }
 
 async function createProduct(req, res) {
-    try {
-        const reqBody = req.body
+    const body = req.body
 
+    try {
         const product = {
-            name: reqBody.name,
-            description: reqBody.description,
-            price: reqBody.price
+            name: body.name,
+            description: body.description,
+            price: body.price
         }
 
         const newProduct = await Product.create(product)
+        if (!newProduct) {
+            return res.status(500).json({ message: 'failed to create product' })
+        }
         res.status(201).json(newProduct)
 
     } catch (err) {
@@ -42,17 +49,16 @@ async function createProduct(req, res) {
     }
 }
 
-async function updateProduct(req, res, id) {
+async function updateProduct(req, res) {
+    const id = req.params.id
+    const { name, description, price } = req.body
+
     try {
         const product = await Product.findById(id)
 
         if (!product) {
-            res.send(PRODUCT_NOT_FOUND)
+            return res.status(404).json(PRODUCT_NOT_FOUND)
         } else {
-            const body = await getPostData(req)
-
-            const { name, description, price } = JSON.parse(body)
-
             const productData = {
                 name: name || product.name,
                 description: description || product.description,
@@ -60,9 +66,7 @@ async function updateProduct(req, res, id) {
             }
 
             const updProduct = await Product.update(id, productData)
-
-            //res.send(updProduct)
-            res.send('UPDATE PRODUCT')
+            res.json(updProduct)
         }
 
     } catch (err) {
@@ -70,19 +74,20 @@ async function updateProduct(req, res, id) {
     }
 }
 
-async function deleteProduct(req, res, id) {
+async function deleteProduct(req, res) {
+    const id = req.params.id
+
     try {
         const product = await Product.findById(id)
 
         if (!product) {
-            res.send(PRODUCT_NOT_FOUND)
-        } else {
-            await Product.remove(id)
-            res.send({ message: `removed ${product?.name} (id: ${id})` })
+            return res.status(500).json(PRODUCT_NOT_FOUND)
         }
+        await Product.remove(id)
+        res.json({ message: `removed ${product?.name} with id ${id}` })
 
     } catch (err) {
-        console.log(err)
+        res.status(500).json({ message: err.message })
     }
 }
 
