@@ -24,6 +24,7 @@ function create(product) {
         const newProduct = { id: uuidv4(), ...product }
         products.push(newProduct)
         writeDataToFile('./data/products.json', products)
+        return product
     } catch (err) {
         console.log(err.message)
     }

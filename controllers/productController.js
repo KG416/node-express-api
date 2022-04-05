@@ -4,25 +4,23 @@ const PRODUCT_NOT_FOUND = { message: 'product not found' }
 async function getProducts(req, res) {
     try {
         const products = await Product.findAll()
-        res.send(products)
+        res.json(products)
     } catch (err) {
-        console.log(err)
+        res.status(500).json({ message: err.message })
     }
 }
 
 async function getProduct(req, res) {
-    const id = req.params.id
     try {
-        const product = await Product.findById(id)
+        const product = await Product.findById(req.params.id)
 
         if (!product) {
-            res.send(PRODUCT_NOT_FOUND)
-        } else {
-            res.send(product)
+            return res.status(404).send(PRODUCT_NOT_FOUND)
         }
+        res.json(product)
 
     } catch (err) {
-        console.log(err)
+        res.send({ message: err.message })
     }
 }
 
