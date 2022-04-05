@@ -1,4 +1,4 @@
-# Vanilla node REST API
+# 🌿 node REST API
 
 A CRUD rest api built with *node.js* & *express*.
 
